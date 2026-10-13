@@ -1,9 +1,9 @@
 # Galaxy Zoo: Roman Pipeline
 A pipeline for creating a Zooniverse project from Roman survey images. The pipeline is structured in four stages.
-1. Step 1 - Select Sources: "Scrape" Roman L3 (images) and L4 (catalogs) data products for an input program and filter combination to compile a master catalog of detected sources.
-2. Step 2 - Cutouts: Create source cutouts (single band and 3 color composites) with various brightness scalings (arcsinh and MTF) applied.
+1. Step 1 - Select-Sources: "Scrape" Roman L3 (images) and L4 (catalogs) data products for an input program and filter combination to compile a master catalog of detected sources.
+2. Step 2 - Create-Cutouts: Create source cutouts (single band and 3 color composites) with various brightness scalings (arcsinh and MTF) applied.
 3. Step 3 - Cutouts-to-Subjects: Create clean multipanel figures for scaled color images and single band images.
-4. Step 4 - Subject-upload: Locally connect to Zooniverse account, create new Zooniverse project and subject set, and batch upload subjects to Zooniverse.
+4. Step 4 - Subject-Upload: Locally connect to Zooniverse account, create new Zooniverse project and subject set, and batch upload subjects to Zooniverse.
 
 ### Step 1 - Select-Sources:
 "Scrape" Roman L3 (images) and L4 (catalogs) data products for an input program and filter combination to compile a master catalog of detected sources. 
@@ -20,7 +20,7 @@ While parsing through the ```in_filter``` L3 files, a tracking list is updated t
 
 An option to re-search for the 'MISSING' L3 files is available. At this stage, if new files are found then an updated master catalog is created and saved.  
 
-### Step 2 - Cutouts:
+### Step 2 - Create-Cutouts:
 Create source cutouts (single band and 3 color composites) with various brightness scalings (arcsinh and MTF) applied. 
 
 Filter master catalog in step 1 for sources to make cutouts for. Currently takes first 200 subjects from master catalog. For each selected source, determines an appropriate cutout size based on a balance between source brightness/faintness and concentration. A minimum cutout size of 64x64 pixels$^2$ ($\sim$50 arcsec$^2$) is imposed. 
@@ -42,7 +42,7 @@ Create clean multipanel figures for scaled color images and single band images.
 
 Individual PNG images are combined into multi-panel presentations. The two 3 color composite images are presented on the same figure, and the individual single band images are presented on the same figure. 
 
-### Step 4 - Subject-upload:
+### Step 4 - Subject-Upload:
 Locally connect to Zooniverse account, create new Zooniverse project and subject set, and batch upload subjects to Zooniverse. An example notebook for a simple upload of subjects from the RRN (or from an externally hosted site) can be found [here](https://github.com/ksand017/RRN-to-Zooniverse-Project-Tutorial).
 
 From the filtered master catalog, creates a catalog of asdf file locations, source catalog metadata (AB mags and kron sizes), PNG file locations+name, and external links. This catalog is used to provide image locations for, and attach metadata to, subject uplaods. 
