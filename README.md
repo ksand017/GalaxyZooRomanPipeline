@@ -1,3 +1,4 @@
+
 # Galaxy Zoo: Roman Pipeline
 A pipeline for creating a Zooniverse project from Roman survey images. The pipeline is structured in four stages.
 1. Step 1 - Select-Sources: "Scrape" Roman L3 (images) and L4 (catalogs) data products for an input program and filter combination to compile a master catalog of detected sources.
@@ -23,9 +24,13 @@ An option to re-search for the 'MISSING' L3 files is available. At this stage, i
 ### Step 2 - Create-Cutouts:
 Create source cutouts (single band and 3 color composites) with various brightness scalings (arcsinh and MTF) applied. 
 
-Filter master catalog in step 1 for sources to make cutouts for. Currently takes first 200 subjects from master catalog. For each selected source, determines an appropriate cutout size based on a balance between source brightness/faintness and concentration. A minimum cutout size of 64x64 pixels$^2$ ($\sim$50 arcsec$^2$) is imposed. 
+Filter master catalog in step 1 for sources to make cutouts for. Currently takes first 200 subjects from master catalog. For each selected source, determines an appropriate cutout size based on a balance between source brightness/faintness and concentration. A minimum cutout size of 64×64 $\text{pixels}^2$ (~50 $\text{arcsec}^2$) is imposed. 
 
-For the image cutouts, 2 brightness scalings are applied to individual filter images before creating composite 3 color images. The first scaling is a simple Arcsinh ([Lupton+2004](https://iopscience.iop.org/article/10.1086/382245/pdf)) stretch. The second scaling uses a Midtones Transfer Function (MTF) which works to brighten fainter features by remapping the fainter pixel values to the midpoint of the output image. Some details on the effects of an MTF scaling can be found [here](https://pixinsight.com/doc/legacy/LE/16_histograms/histogram_manipulation/histogram_manipulation.html).
+For the image cutouts, 2 brightness scalings are applied to individual filter images before creating composite 3 color images. The first scaling is a simple Arcsinh ([Lupton+2004](https://iopscience.iop.org/article/10.1086/382245/pdf)) stretch. The second scaling uses a Midtones Transfer Function (MTF) which works to brighten fainter features by remapping the fainter pixel values to the midpoint of the output image. Some details on the effects of an MTF scaling can be found [here](https://pixinsight.com/doc/legacy/LE/16_histograms/histogram_manipulation/histogram_manipulation.html). The images below provide examples of these scalings. The left show a source with Arcsinh scaling applied, while the right shows a source with MTF scaling applied to its images. 
+
+<img width="256" height="256" alt="4_arcsinh_desaturated" src="https://github.com/user-attachments/assets/708b9087-5274-45d9-8f1f-3ea52ab5f018" />
+<img width="256" height="256" alt="4_mtf_desaturated" src="https://github.com/user-attachments/assets/131f52bd-512b-4b0a-af9c-8bdb69295547" />
+
 
 After applying these two different scalings, two 3 color composite images are created and saved with extensions ```'_arcsinh.png'``` and ```'_mtf.png'```
 
@@ -40,7 +45,10 @@ In addition to the 3 color composite images, single band images are also created
 ### Step 3 - Cutouts-to-Subjects:
 Create clean multipanel figures for scaled color images and single band images.
 
-Individual PNG images are combined into multi-panel presentations. The two 3 color composite images are presented on the same figure, and the individual single band images are presented on the same figure. 
+Individual PNG images are combined into multi-panel presentations. The two 3 color composite images are presented on the same figure (top), and the individual single band images are presented on the same figure (bottom). 
+<img width="1559" height="806" alt="4-composite" src="https://github.com/user-attachments/assets/6fb23f25-31cb-461c-b875-85fb85267389" />
+
+<img width="1559" height="1559" alt="4-single_band" src="https://github.com/user-attachments/assets/31612ee1-0939-46e2-9fc3-679d01c60e18" />
 
 ### Step 4 - Subject-Upload:
 Locally connect to Zooniverse account, create new Zooniverse project and subject set, and batch upload subjects to Zooniverse. An example notebook for a simple upload of subjects from the RRN (or from an externally hosted site) can be found [here](https://github.com/ksand017/RRN-to-Zooniverse-Project-Tutorial).
